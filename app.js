@@ -44,8 +44,8 @@ client.on('message', function(topic, message) {
                     mattSeq[i]++;
                 }
                 
-                if(mqttList[i].length > 10000) {
-                    mqttList[i].splice(0, mqttList[i].length - 5000);
+                if(mqttList[i].length > 500) {
+                    mqttList[i].splice(0, 250);
                 }
                 eval('mqttObj.' + device + ' = mqttList[i];');
             //}
