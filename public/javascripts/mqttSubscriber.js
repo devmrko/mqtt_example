@@ -21,24 +21,29 @@ obj_NgApp.controller('ctr_gridTest', function ($scope, $http, $document, $window
             $scope.deviceList = [];
             for (var i = 0; i < Object.keys(returnData.chartDobj).length; i++) {
                 $scope.deviceList[$scope.deviceList.length] = Object.keys(returnData.chartDobj)[i];
-                var data = new google.visualization.DataTable();
-                var options = {
-                    hAxis: {
-                        title: 'Time'
-                    },
-                    vAxis: {
-                        title: 'device: ' + Object.keys(returnData.chartDobj)[i]
-                    }
-                };
-                data.addColumn('number', 'X');
-                data.addColumn('number', 'gyro-x');
-                data.addColumn('number', 'gyro-y');
-                data.addColumn('number', 'gyro-z');
-
-                data.addRows(eval('returnData.chartDobj.' + Object.keys(returnData.chartDobj)[i]));
-                var chart = new google.visualization.LineChart(document.getElementById('chart_div' + i));
-                chart.draw(data, options);
             }
+            setTimeout(function () {
+                for (var i = 0; i < Object.keys(returnData.chartDobj).length; i++) {
+                    var data = new google.visualization.DataTable();
+                    var options = {
+                        hAxis: {
+                            title: 'Time'
+                        },
+                        vAxis: {
+                            title: 'device: ' + Object.keys(returnData.chartDobj)[i]
+                        }
+                    };
+                    data.addColumn('number', 'X');
+                    data.addColumn('number', 'gyro-x');
+                    data.addColumn('number', 'gyro-y');
+                    data.addColumn('number', 'gyro-z');
+
+                    data.addRows(eval('returnData.chartDobj.' + Object.keys(returnData.chartDobj)[i]));
+                    var chart = new google.visualization.LineChart(document.getElementById('chart_div' + i));
+                    chart.draw(data, options);
+                }
+                
+            }, 1000);
 
         }).error(function (data, status, headers, config) {
             alert('error: ' + status);
