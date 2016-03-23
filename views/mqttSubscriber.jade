@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    link(rel='stylesheet', href='/stylesheets/jquery.tagsinput.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js')
+    script(src='https://www.gstatic.com/charts/loader.js')
+    .container(ng-app="app_gridTest", ng-controller="ctr_gridTest", ng-cloak='')
+        .row
+            .col-md-12
+                label
+        .row(ng-repeat="item in deviceList")
+            .col-md-12
+                div(id="{{ 'chart_div' + $index }}")
+        .row
+            .col-md-12
+                form.form-inline
+                    .form-group
+                        label Get gyroscope info:&nbsp
+                        input.btn.btn-default(type='button',value='chartTest', ng-click='chartTest()')                                               
+    
+    script(src='/javascripts/mqttSubscriber.js')
